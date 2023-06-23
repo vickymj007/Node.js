@@ -22,8 +22,7 @@ app.get('/',((req,res)=>{
 
 //Api end point to read text file
 app.get('/read-file',((req,res)=>{
-
-    fs.readFile(`${currentDirectory}/date-time.txt`,'utf-8',((err,data)=>{
+    fs.readFile(`${currentDirectory}/date-time.txt`,'UTF-8',((err,data)=>{
         if(err){
             console.log(err);
         }else{
