@@ -1,0 +1,31 @@
+{
+    "room":[
+        {
+            "room-name":"G1",
+            "seats-available":80,
+            "amenities":["AC","Wi-Fi","Room Service", "Minibar", "Smart-TV","Towel"],
+            "price-per-hour":6000
+        }
+    ],
+    "book-room":{},
+    "list-all-rooms":[
+        {
+            "room-name":"G1",
+            "booked-status":"booked",
+            "customer-name":"Vignesh",
+            "booked-date": "2023-06-20",
+            "start-time":"12:23",
+            "end-time":"02:53"
+        }
+    ],
+    "customers":[
+        {
+            "customer-name":"Vignesh",
+            "room-name":"G1",
+            "booked-date": "2023-06-20",
+            "start-time":"12:23",
+            "end-time":"02:53"
+        }
+    ]
+
+}
