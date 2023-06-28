@@ -9,7 +9,7 @@ const PORT = process.env.PORT
 app.use(express.json())
 
 app.get('/',(req,res)=>{
-    res.status(200).send("This is the Home Page")
+    res.sendFile(`D:/Node/Node-Practice/views/index.html`)
 })
 
 app.use('/',browserRouter)
