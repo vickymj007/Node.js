@@ -1,22 +1,23 @@
 import mongoose from "mongoose";
 
-const roomModel = new mongoose.Schema(
+const roomModel =  mongoose.Schema(
     {
         room_name:{
             type:String,
-            required:true
+            required:[true,"Room name is required"],
+            unique:[true,"Room name already exist"]
         },
         seats_available:{
             type:Number,
-            required:true
+            required:[true,"Number of seats is required"]
         },
         price_per_hour:{
             type:Number,
-            required:true
+            required:[true,"Price is required"]
         },
         amenities:{
             type:[String],
-            required:true
+            required:[true,"Amenities is required"]
         },
         isBooked:{
             type:Boolean,

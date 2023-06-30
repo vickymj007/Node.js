@@ -1,9 +1,9 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
-import authRoute from './Routes/auth.js'
-import roomsRoute from './Routes/rooms.js'
-import customersRoute from './Routes/customers.js'
+import authRoute from './Routes/authRoute.js'
+import roomsRoute from './Routes/roomsRoute.js'
+import customersRoute from './Routes/customersRoute.js'
 
 //Configuring ENV files
 dotenv.config()
@@ -26,9 +26,19 @@ const app = express()
 
 //Middlewares
 app.use(express.json())
-app.use('/auth', authRoute)
-app.use('/rooms', roomsRoute)
-app.use('/customers', customersRoute)
+app.use('/api/auth', authRoute)
+app.use('/api/rooms', roomsRoute)
+app.use('/api/customers', customersRoute)
+app.use((err,req,res,next)=>{
+    const errorStatus = err.status || 500
+    const errorMessage = err.message || "Something went wrong"
+    res.status(errorStatus).json({
+        success:false,
+        status : errorStatus,
+        message : errorMessage,
+        stack: err.stack
+    })
+})
 
 
 

@@ -1,20 +1,34 @@
 import mongoose from "mongoose";
 import New_User from './users.js'
+import express from 'express'
 
-mongoose.connect('mongodb://127.0.0.1:27017/')
+const app = express()
+app.use(express.json())
 
-run()
-async function run(){
+
+const DBconnect = async ()=>{
     try {
-        const user = await New_User.create(
-        {
-            name:"Ajay", 
-            age:16,
-            email:"viC@gmail.com",
-        })
+    await mongoose.connect('mongodb+srv://vickymj007:Shanks@cluster0.7vhpjei.mongodb.net/guvi_task?retryWrites=true&w=majority')
+    console.log("MongoDB Connected");
+} catch (error) {
+    console.log("MongoDB Disconnected");   
+}}
+
+app.post('/test', async (req,res)=>{
+    try {
+        const user = await New_User.create(req.body)
         await user.save()
-        console.log(user);
+        res.setHeader('Set-Cookie',"name=Vignesh")
+        res.status(201).json(user)
+
     } catch (error) {
         console.log(error.message);
+        res.status(500).json({message:"Error adding data"})
     }
-}
+})
+
+
+app.listen(9000,()=>{
+    DBconnect()
+    console.log("Server Connected");
+})
