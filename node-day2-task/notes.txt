@@ -1,0 +1,25 @@
+{
+    "_id": "64a00673fcb20335563d0061",
+    "room_name": "F3",
+    "seats_available": 65,
+    "price_per_hour": 6000,
+    "amenities": [
+        "Wi-Fi",
+        "Drinks",
+        "Smart-TV",
+        "Room service"
+    ],
+    "isBooked": true,
+    "__v": 0
+}
+To Book a room
+{
+    "_id": "64a005be916b9961b58f2ac8",
+    "name": "Nancy1",
+    "email": "nanc1y123@gmail.com",
+    "room_id": "G2",
+    "date": "2023-07-01T10:53:22.938Z",
+    "start_time": "Sun Dec 10 2023 11:34:00 GMT+0530 (India Standard Time)",
+    "end_time": "Sun Dec 10 2023 12:34:00 GMT+0530 (India Standard Time)",
+    "__v": 0
+}

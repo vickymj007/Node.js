@@ -1,7 +1,6 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
-import authRoute from './Routes/authRoute.js'
 import roomsRoute from './Routes/roomsRoute.js'
 import customersRoute from './Routes/customersRoute.js'
 
@@ -24,11 +23,12 @@ mongoose.connection.on('disconnected',()=>console.log("MongoDB Disconnected"))
 //Initializing Express Server
 const app = express()
 
+
 //Middlewares
 app.use(express.json())
-app.use('/api/auth', authRoute)
 app.use('/api/rooms', roomsRoute)
 app.use('/api/customers', customersRoute)
+app.use('/api/booking-history', customersRoute)
 app.use((err,req,res,next)=>{
     const errorStatus = err.status || 500
     const errorMessage = err.message || "Something went wrong"
@@ -39,8 +39,6 @@ app.use((err,req,res,next)=>{
         stack: err.stack
     })
 })
-
-
 
 //Listening to Server
 app.listen(PORT,()=>{

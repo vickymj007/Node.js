@@ -1,3 +1,4 @@
+import Customer from '../models/customerModel.js'
 import Room from '../models/roomsModel.js'
 
 
@@ -40,9 +41,21 @@ export const updateRoom = async (req,res,next)=>{
 }
 export const deleteRoom = async (req,res,next)=>{
     try {
-        await Room.findByIdAndDelete(req.params.id)
+        const {id} = req.params
+        const room = Room.findById(id)
+        if(!room){
+            throw new Error("Unable to find room")
+        }
+        const customer = Customer.findOne({room_id:room.room_name})
+        if(!customer){
+            await Room.findByIdAndDelete(id)
+            res.status(200).json({message:"Room successfully deleted"})
+        }
+        await Customer.deleteOne({room_id:customer.room_id})
+        await Room.findByIdAndDelete(id)
         res.status(200).json({message:"Room successfully deleted"})
     } catch (error) {
         next(error)
     }
 }
+

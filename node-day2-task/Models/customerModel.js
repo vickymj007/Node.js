@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+
 const customerSchema = mongoose.Schema({
     name:{
         type:String,
@@ -15,17 +16,25 @@ const customerSchema = mongoose.Schema({
         required:[true,"Room ID is required"],
     },
     date:{
-        type:String, // YYYY-MM-DD format
+        type: String, // Date format should be "YEAR-MM-DD"
         required:[true,"Booking date is required"],
     },
     start_time:{
-        type:"String", // HH:MM format
+        type:String, // Date format should be "YEAR-MM-DD HH:MM"
         required:[true,"Start time is required"],
     },
     end_time:{
-        type:"String", // HH:MM format
+        type:String, // // Date format should be "YEAR-MM-DD HH:MM"
         required:[true,"End time is required"],
     }
 })
+
+customerSchema.pre('save', async function(next){
+    this.date = new Date(this.date)
+    this.start_time = new Date(this.start_time)
+    this.end_time = new Date(this.end_time)
+    next()
+})
+
 
 export default mongoose.model('Customer',customerSchema)

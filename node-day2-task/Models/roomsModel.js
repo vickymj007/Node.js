@@ -22,7 +22,8 @@ const roomModel =  mongoose.Schema(
         isBooked:{
             type:Boolean,
             default:false
-        }
+        },
+        bookingDetails:Object
     }
 )
 
