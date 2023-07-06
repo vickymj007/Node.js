@@ -1,6 +1,6 @@
 import { createError } from '../Utilities/handleErrors.js'
-import Customer from '../models/customerModel.js'
-import Room from '../models/roomsModel.js'
+import {Customer} from '../Models/customerModel.js'
+import Room from '../Models/roomsModel.js'
 import Booking_history from '../Models/bookingHistoryModel.js'
 import { ObjectId } from 'mongodb'
 

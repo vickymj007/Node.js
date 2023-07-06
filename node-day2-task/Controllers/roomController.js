@@ -1,5 +1,5 @@
-import Customer from '../models/customerModel.js'
-import Room from '../models/roomsModel.js'
+import {Customer} from '../Models/customerModel.js'
+import Room from '../Models/roomsModel.js'
 
 
 export const createRoom = async (req,res,next)=>{
