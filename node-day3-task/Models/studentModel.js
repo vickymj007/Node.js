@@ -16,6 +16,10 @@ const studentSchema = mongoose.Schema({
     mentor_name:{
         type:String,
         default:"Not yet assigned"
+    },
+    previous_mentor_name:{
+        type:String,
+        default:"Student does not have a previous mentor"
     }
 })
 

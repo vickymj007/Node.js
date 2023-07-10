@@ -24,27 +24,29 @@ export const createMentor= async (req,res,next)=>{
 //To assign a single student to a particular mentor
 export const assignStudentToMentor= async(req,res,next)=>{
     try {
-        const {name} = req.params
-        const {student_id} = req.params
-        if(!name || !student_id){
-            throw Error("Mentor name or Student ID is missing")
-        }
-        const mentor = await Mentor.findOne({name})
+        const mentor = await Mentor.findOne({name:req.params.name})
+        const student = await Student.findOne({student_id:req.params.student_id})
+
         if(!mentor){
             throw Error("Mentor is not available in the database")
         }
-        const student = await Student.findOne({student_id})
         if(!student){
             throw Error("Student is not available in the database")
         }
-        await Mentor.updateOne({name},{$set:{students:[...mentor.students,{name:student.name,student_id:student.student_id}]}})
-        await Student.updateOne({student_id},{$set:{mentor_name:mentor.name}})
-        res.status(201).json({success:true,mesage:"New student has been assigned to mentor"})
+        if(student.mentor_name !== "Not yet assigned"){
+            throw Error(`This student already has ${student.mentor_name} as his mentor`)
+        }
+
+        await Mentor.updateOne({name:mentor.name},{$set:{students:[...mentor.students,{name:student.name,student_id:student.student_id}]}})
+        await Student.updateOne({student_id:student.student_id},{$set:{mentor_name:mentor.name}})
+        res.status(201).json({success:true,mesage:`${mentor.name} has been assigned as a mentor to student ${student.name}`})
+    
     } catch (error) {
         next(error)
     }
 }
 
+//Assign Multiple students to a single mentor.
 export const assignStudentsToMentor = async(req,res,next)=>{
     try {
         const {name} = req.params
@@ -82,6 +84,19 @@ export const assignStudentsToMentor = async(req,res,next)=>{
             students:studentArray
         })
         
+    } catch (error) {
+        next(error)
+    }
+}
+
+//Get all students for a particulr mentor
+export const getStudentsForMentor = async(req,res,next)=>{
+    try {
+        const mentor = await Mentor.findOne({name:req.params.mentor_name})
+        if(!mentor){
+            throw Error("Mentor name is not available in the database, Please enter a valid name")
+        }
+        res.status(200).json({student_list:mentor.students})
     } catch (error) {
         next(error)
     }

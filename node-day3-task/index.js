@@ -20,7 +20,6 @@ const connectDB = async()=>{
     }
 }
 
-mongoose.connection.on('disconnected',()=>console.log("MongoDB Disconnected"))
 
 //Middlewares
 app.use(express.json())
